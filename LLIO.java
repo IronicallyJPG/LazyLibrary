@@ -19,63 +19,68 @@ public class LLIO extends LL{
 	
 	
 	//==============================================================//
-
+	// Object to hold all Methods.
 	public LLIO(){}
 	
+	// Creates a File
 	public void createFile(String name){
 		try {
 		     File fileA = new File((name+".txt"));
 		     if (fileA.createNewFile()){
-		    	 console("File '"+name+".txt' has been created successfully");
+		    	 if(DEV_MODE==true)console("File '"+name+".txt' has been created successfully");
 		     }
 		     else{
-		    	 console("File '"+name+".txt' already present at the specified location");
+		    	 if(DEV_MODE==true)console("File '"+name+".txt' already present at the specified location");
 		     }
-	    	} catch (IOException e) {
+	    	}catch (IOException e) {
 	    		console("Exception Occurred:");
-		        e.printStackTrace();
-		  }
+	    		if(DEV_MODE==true)e.printStackTrace();
+	    	}
 	}
+	// Creates a File with Temporary Tag SET TO TRUE! Meaning it is DELETED upon exit.
 	public void createTempFile(String name){
 		try {
 		     File fileA = new File((name+".txt"));
 		     if (fileA.createNewFile()){
 		    	 fileA.deleteOnExit();
-		    	 console("File '"+name+".txt' has been created successfully");
+		    	 if(DEV_MODE==true)console("File '"+name+".txt' has been created successfully");
 		     }
 		     else{
-		    	 console("File '"+name+".txt' already present at the specified location");
+		    	 if(DEV_MODE==true)console("File '"+name+".txt' already present at the specified location");
 		     }
 	    	} catch (IOException e) {
 	    		console("Exception Occurred:");
-		        e.printStackTrace();
+		        if(DEV_MODE==true)e.printStackTrace();
 		  }
 	}
 	//==============================================================//
+	// Creates a File.
 	public void createFile(String name, String ext){
 		try {
 		     File fileA = new File((name+"."+ext));
 		     fileA.getName();
 		     if (fileA.createNewFile()){
-		    	 console("File has been created successfully");
+		    	 if(DEV_MODE==true)console("File has been created successfully");
 		     }
 		     else{
-		    	 console("File already present at the specified location");
+		    	 if(DEV_MODE==true)console("File already present at the specified location");
 		     }
 	    	} catch (IOException e) {
 	    		console("Exception Occurred:");
-		        e.printStackTrace();
+		        if(DEV_MODE==true)e.printStackTrace();
 		  }
 	}
 	//==============================================================//
+	// Deletes a File.
 	public void deleteFile(File a){
 		if(a.delete()){
-			console("File Deleted!");
+			if(DEV_MODE==true)console("File Deleted!");
 		}else{
-			console("File Not Found For Deletion!");
+			if(DEV_MODE==true)console("File Not Found For Deletion!");
 		}
 	}
 	//==============================================================//
+	// Pulls Text from file.
 	public String getTextFromFile(File f){
 		String ret = "";
 		if(f.exists()){
@@ -91,12 +96,14 @@ public class LLIO extends LL{
 					}
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				console("Error!");
+				if(DEV_MODE==true)e.printStackTrace();
 			} finally{
 				try{
 					if (br != null)br.close();
 				} catch (IOException ex) {
-					ex.printStackTrace();
+					console("Error!");
+					if(DEV_MODE==true)ex.printStackTrace();
 				}
 			}
 		}else{
@@ -105,6 +112,7 @@ public class LLIO extends LL{
 		return ret;
 	}
 	//==============================================================//
+	// Writes passed Data to file.
 	public String writeTextToFile(File f, String dataToWrite, boolean newLine){
 		String ret = " ";
 		if(f.exists()){
@@ -116,17 +124,20 @@ public class LLIO extends LL{
 				writer.flush();
 				writer.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				console("Error!");
+				if(DEV_MODE==true)e.printStackTrace();
 			}
 		}else{
 			console("No File Found!");
 		}
 		return ret;
 	}
-	public   boolean doesFileExist(File f){
+	// Does File Exist? Returns Boolean answer
+	public boolean doesFileExist(File f){
 	    return f.exists();
 	}
 	//================================================================
+	// Saves a Screenshot. With passed name.
 	public void ScreenShot(String fileName){
 		try { 
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -135,10 +146,13 @@ public class LLIO extends LL{
 		   	BufferedImage image = robot.createScreenCapture(screenRectangle);
 			ImageIO.write(image, "png", new File(fileName));
 		} catch (IOException | AWTException e) {
-			e.printStackTrace();
+			console("Error!");
+			if(DEV_MODE==true)e.printStackTrace();
 		}
 	}
 	//================================================================
+	// Gets Current Directory Contents!
+	// Returns Array of Strings/Names
 	public String[] getCDContents(){
 		File cd = new File(getCurrentDirectory());
 		String[] files = cd.list();
