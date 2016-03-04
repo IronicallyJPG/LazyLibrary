@@ -1,4 +1,4 @@
-package Charles.LazyLibrary;
+package main;
 
 import java.awt.AWTException;
 import java.awt.Dimension;
@@ -23,9 +23,10 @@ public class LLIO extends LL{
 	public LLIO(){}
 	
 	// Creates a File
-	public void createFile(String name){
+	public File createFile(String name){
+		File fileA = null;
 		try {
-		     File fileA = new File((name+".txt"));
+		     fileA = new File((name+".txt"));
 		     if (fileA.createNewFile()){
 		    	 if(DEV_MODE==true)console("File '"+name+".txt' has been created successfully");
 		     }
@@ -36,11 +37,13 @@ public class LLIO extends LL{
 	    		console("Exception Occurred:");
 	    		if(DEV_MODE==true)e.printStackTrace();
 	    	}
+		return fileA;
 	}
 	// Creates a File with Temporary Tag SET TO TRUE! Meaning it is DELETED upon exit.
-	public void createTempFile(String name){
+	public File createTempFile(String name){
+		File fileA = null;
 		try {
-		     File fileA = new File((name+".txt"));
+		     fileA = new File((name+".txt"));
 		     if (fileA.createNewFile()){
 		    	 fileA.deleteOnExit();
 		    	 if(DEV_MODE==true)console("File '"+name+".txt' has been created successfully");
@@ -52,6 +55,7 @@ public class LLIO extends LL{
 	    		console("Exception Occurred:");
 		        if(DEV_MODE==true)e.printStackTrace();
 		  }
+		return fileA;
 	}
 	//==============================================================//
 	// Creates a File.
@@ -72,7 +76,7 @@ public class LLIO extends LL{
 	}
 	//==============================================================//
 	// Deletes a File.
-	public void deleteFile(File a){
+	public void delFile(File a){
 		if(a.delete()){
 			if(DEV_MODE==true)console("File Deleted!");
 		}else{

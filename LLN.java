@@ -1,4 +1,4 @@
-package Charles.LazyLibrary;
+package main;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -8,8 +8,10 @@ import java.net.UnknownHostException;
 
 public class LLN extends LL{
 	
+	// Object Holder
 	public LLN(){}
 	
+	// Tests If Current Host is Working
 	public void currentHostTest(){
 		InetAddress ip;
         try {
@@ -23,6 +25,7 @@ public class LLN extends LL{
             e.printStackTrace();
         }
 	}
+	// Connected to internet?
 	public boolean connectedToInternet(){
 		URL obj;
 		try {
@@ -34,6 +37,7 @@ public class LLN extends LL{
 		catch (IOException e) {}
 		return false;
 	}
+	// Is a passed site online?
 	public boolean siteonline(String url){
 		URL obj;
 		try {
