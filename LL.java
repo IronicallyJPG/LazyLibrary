@@ -18,7 +18,7 @@ public class LL {
 	public static String AUTHOR 	= "Charles";
 	public static String LibName 	= "LazyLib";
 	public static String VERSION 	= "1.3.0";
-	public static String Desc 		= "A Simple Lazy Library.";
+	public static String Desc 	= "A Simple Lazy Library.";
 	public static boolean DEV_MODE = false;
 	public static ArrayList<Object> runtimeArgs;
 	private static LLD date = new LLD();
