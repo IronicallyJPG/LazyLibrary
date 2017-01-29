@@ -36,7 +36,7 @@ public class LL {
 	//=====================================================================//
 	// Averages
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes an Integer Array and Makes an Average out of all the values
 	 * 
 	 * @param in The input
 	 * */
@@ -44,7 +44,7 @@ public class LL {
 		return math.averageInt(in);
 	}
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes an Integer List and Makes an Average out of all the values
 	 * 
 	 * @param in The input
 	 * */
@@ -53,7 +53,7 @@ public class LL {
 	}
 	//==================
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes a Long Array and Makes an Average out of all the values
 	 * 
 	 * @param in The input
 	 * */
@@ -61,7 +61,7 @@ public class LL {
 		return math.averageLong(in);
 	}
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes a Long List and Makes an Average out of all the values
 	 * 
 	 * @param in The input
 	 * */
@@ -70,7 +70,7 @@ public class LL {
 	}
 	//==================
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes a Float Array and Makes an Average out of all the values
 	 * 
 	 * @param in The input
 	 * */
@@ -78,7 +78,7 @@ public class LL {
 		return math.averageFloat(in);
 	}
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes a Float List and Makes an Average out of all the values
 	 * 
 	 * @param in The input
 	 * */
@@ -87,7 +87,7 @@ public class LL {
 	}
 	//==================
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes a Double Array and Makes an Average out of all the values
 	 * 
 	 * @param in The input
 	 * */
@@ -95,7 +95,7 @@ public class LL {
 		return math.averageDouble(in);
 	}
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes a Double List and Makes an Average out of all the values
 	 * 
 	 * @param in The input
 	 * */
@@ -105,7 +105,7 @@ public class LL {
 	//=====================================
 	// Highest Values
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes an Integer Array and finds the highest value within it.
 	 * 
 	 * @param in The input
 	 * */
@@ -113,7 +113,7 @@ public class LL {
 		return math.findLargestValueINT(in);
 	}
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes an Integer List and finds the highest value within it.
 	 * 
 	 * @param in The input
 	 * */
@@ -122,7 +122,7 @@ public class LL {
 	}
 	//==================
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes a Long Array and finds the highest value within it.
 	 * 
 	 * @param in The input
 	 * */
@@ -130,7 +130,7 @@ public class LL {
 		return math.findLargestValueLONG(in);
 	}
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes a Long List and finds the highest value within it.
 	 * 
 	 * @param in The input
 	 * */
@@ -139,7 +139,7 @@ public class LL {
 	}
 	//==================
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes a Float Array and finds the highest value within it.
 	 * 
 	 * @param in The input
 	 * */
@@ -147,7 +147,7 @@ public class LL {
 		return math.findLargestValueFLOAT(in);
 	}
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes a Float List and finds the highest value within it.
 	 * 
 	 * @param in The input
 	 * */
@@ -156,7 +156,7 @@ public class LL {
 	}
 	//==================
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes a Double Array and finds the highest value within it.
 	 * 
 	 * @param in The input
 	 * */
@@ -164,7 +164,7 @@ public class LL {
 		return math.findLargestValueDOUBLE(in);
 	}
 	/**
-	 * Takes a List/Array and Makes an Average out of all the values
+	 * Takes a Double List and finds the highest value within it.
 	 * 
 	 * @param in The input
 	 * */
