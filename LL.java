@@ -14,13 +14,15 @@ public class LL {
 	 * Adding Some basic Methods.
 	 * Feel Free to use them.
 	 * 'DEV_MODE' set to true will output more USEFUL Errors instead of sidestepping them
+	 * 
+	 * TO USE: just do LL. to  get all these functions, AFTER making sure to setup your workspace
 	*/
 
 	//====================================================================//
 	// 		Basic Variables Needed Supplied for Library              	  //
 	public static String AUTHOR 	= "Charles";
 	public static String LibName 	= "LazyLib";
-	public static String VERSION 	= "1.5.0";
+	public static String VERSION 	= "1.5.2";
 	public static String Desc 		= "A Simple Lazy Library.";
 	public static boolean DEV_MODE 	= false;
 	public static ArrayList<Object> runtimeArgs;
@@ -28,9 +30,153 @@ public class LL {
 	private static LLN net 	= new LLN(); // Netowkring Extension
 	private static LLIO io 	= new LLIO();// I/O Extension
 	private static LLE en	= new LLE(); // Encryption Extension
+	private static LLM math = new LLM(); // Math Extension
+	
+	
+	//=====================================================================//
+	// Averages
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static int AverageInt(int[] in){
+		return math.averageInt(in);
+	}
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static int AverageInt(ArrayList<Integer> in){
+		return math.averageInt(in);
+	}
+	//==================
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static long AverageLong(long[] in){
+		return math.averageLong(in);
+	}
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static long AverageLong(ArrayList<Long> in){
+		return math.averageLong(in);
+	}
+	//==================
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static float AverageFLOAT(float[] in){
+		return math.averageFloat(in);
+	}
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static float AverageFloat(ArrayList<Float> in){
+		return math.averageFloat(in);
+	}
+	//==================
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static double AverageDouble(double[] in){
+		return math.averageDouble(in);
+	}
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static double AverageDouble(ArrayList<Double> in){
+		return math.averageDouble(in);
+	}
+	//=====================================
+	// Highest Values
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static int highestINTFromArray(int[] in){
+		return math.findLargestValueINT(in);
+	}
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static int highestINTFromList(ArrayList<Integer> in){
+		return math.findLargestValueINT(in);
+	}
+	//==================
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static long highestLONGFromArray(long[] in){
+		return math.findLargestValueLONG(in);
+	}
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static long highestLONGFromArray(ArrayList<Long> in){
+		return math.findLargestValueLONG(in);
+	}
+	//==================
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static float highestFLOATFromArray(float[] in){
+		return math.findLargestValueFLOAT(in);
+	}
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static float highestFLOATFromArray(ArrayList<Float> in){
+		return math.findLargestValueFLOAT(in);
+	}
+	//==================
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static double highestDOUBLEFromArray(double[] in){
+		return math.findLargestValueDOUBLE(in);
+	}
+	/**
+	 * Takes a List/Array and Makes an Average out of all the values
+	 * 
+	 * @param in The input
+	 * */
+	public static double highestDOUBLEFromArray(ArrayList<Double> in){
+		return math.findLargestValueDOUBLE(in);
+	}
 	
 	//=====================================================================//
 	
+	
+	
+	//=====================================================================//
 	/**
 	 * Console wrapped into an easier to access method. 
 	 * ( Saving you from System.out.println(s) )
