@@ -20,7 +20,7 @@ public class LLIO extends LL{
 	
 	//==============================================================//
 	// Object to hold all Methods.
-	public LLIO(){}
+	public LLIO(){LL.LL_LINK();}
 	
 	// Creates a File
 	public File createFile(String name){

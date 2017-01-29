@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 public class LLN extends LL{
 	
 	// Object Holder
-	public LLN(){}
+	public LLN(){LL.LL_LINK();}
 	
 	// Tests If Current Host is Working
 	public void currentHostTest(){

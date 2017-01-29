@@ -1,4 +1,4 @@
-package Charles.LazyLibrary;
+package main;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class LLD extends LL{
+public class LLD{
 	
 	// All Date Values in Array Format
 	private ArrayList<String> wholeDate = new ArrayList<String>();
@@ -57,6 +57,7 @@ public class LLD extends LL{
 	//=============================================================//
 	// Fresh Objects Set the date from the JVM. 
 	public LLD(){
+		 LL.LL_LINK();; // EMPTY MESSAGE TO
 		setCurrentDate();
 	}
 	//=============================================================//

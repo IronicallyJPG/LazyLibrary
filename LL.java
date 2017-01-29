@@ -5,36 +5,67 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class LL {
 	
 	/* Welcome to this Library.
 	 * Adding Some basic Methods.
+	 * Feel Free to use them.
+	 * 'DEV_MODE' set to true will output more USEFUL Errors instead of sidestepping them
 	*/
 
 	//====================================================================//
 	// 		Basic Variables Needed Supplied for Library              	  //
 	public static String AUTHOR 	= "Charles";
 	public static String LibName 	= "LazyLib";
-	public static String VERSION 	= "1.3.0";
-	public static String Desc 	= "A Simple Lazy Library.";
-	public static boolean DEV_MODE = false;
+	public static String VERSION 	= "1.5.0";
+	public static String Desc 		= "A Simple Lazy Library.";
+	public static boolean DEV_MODE 	= false;
 	public static ArrayList<Object> runtimeArgs;
-	private static LLD date = new LLD();
-	private static LLN net = new LLN();
-	private static LLIO io = new LLIO();
+	private static LLD date = new LLD(); // Dates Extension
+	private static LLN net 	= new LLN(); // Netowkring Extension
+	private static LLIO io 	= new LLIO();// I/O Extension
+	private static LLE en	= new LLE(); // Encryption Extension
+	
 	//=====================================================================//
 	
 	/**
-	 * Console wrapped into an easier to access method. ( Saving you from System.out.println(s) )
+	 * Console wrapped into an easier to access method. 
+	 * ( Saving you from System.out.println(s) )
 	 * @param t The String to write to console. 
 	*/
 	public static void console(Object t){
 		System.out.println(t);
 	}
-	public static void toggle_DevMode(boolean t){
-		DEV_MODE=t;
+	/**
+	 * SLOW PRINT Tool
+	 * @param t The String to write to console.
+	 * @param seconds Time to display test. 
+	*/
+	public static void slowPrint(Object t, int seconds){
+		char[] test = t.toString().toCharArray();
+		int timer = ((seconds*1000)/test.length);
+		for(char f : test){
+			System.out.print(f);
+			try {Thread.sleep(timer);} catch (InterruptedException e) {if(DEV_MODE==true)e.printStackTrace();} // Slow Print Trick
+		}
+	}
+	/**
+	 * Sends a message only seen when DEV_MODE is enabled
+	 * @param message Info to display.
+	 * @param time Add a time to the message
+	 * */
+	public static void DebugMsg(Object message, String time){
+		if(DEV_MODE==true)console("<<DEBUG : "+time+">> "+message);
+	}
+	/**
+	 * Sends a message only seen when DEV_MODE is enabled
+	 * @param message Info to display.
+	 * */
+	public static void DebugMsg(Object message){
+		if(DEV_MODE==true)console("<<DEBUG>>"+message);
 	}
 	//=====================================================================//
 	
@@ -48,13 +79,18 @@ public class LL {
 		Scanner s = new Scanner(System.in);
 		System.out.print(q);
 		ret = s.nextLine();
+		ret.trim();
 		return ret;
 	}
 	//=====================================================================//
-	public static void pauseCurrentThread(int seconds){
+	/**
+	 * Pauses Thread
+	 * @param seconds Time in SECONDS to pause Thread
+	 * */
+	public static void pauseCurrentThread(float seconds){
 		try {
 			Thread.currentThread();
-			Thread.sleep((seconds*1000));
+			Thread.sleep(((long)(seconds*1000)));
 		} catch (InterruptedException e) {
 			if(DEV_MODE==true)e.printStackTrace();
 		}
@@ -78,6 +114,52 @@ public class LL {
 		return ret;
 	}
 	//=====================================================================//
+	/**
+	 * TRIES to convent a String to Integer
+	 * @param input String to check
+	 * */
+	public static boolean isInteger( String input ) {
+	    try {
+	        Integer.parseInt( input );
+	        return true;
+	    }
+	    catch( Exception e ) {
+	        return false;
+	        
+	    }
+	}
+	/**
+	 * Returns Random Number
+	 * @param max Ceiling for Random Value 
+	 * */
+	public static int random(int max){
+		if(max<=0){max = 2;}
+		Random rand = new Random();
+		return rand.nextInt(max);
+	} 
+	/**
+	 * INT -> HEX
+	 * @param value INT in
+	 * */
+	public static String HexfromInt(int value){
+		return Integer.toHexString(value);
+	} 
+	/**
+	 * INT -> BINARY
+	 * @param value INT in
+	 * */
+	public static String BinaryfromInt(int value){
+		return Integer.toBinaryString(value);
+	} 
+	/**
+	 * INT -> Octal
+	 * @param value INT in
+	 * */
+	public static String OctalfromInt(int value){
+		return Integer.toOctalString(value);
+	} 
+	
+	//=====================================================================//
 	
 	/**
 	 * Simple Boolean return if an int is even or not
@@ -92,10 +174,10 @@ public class LL {
 	}
 	//=====================================================================//
 	/**
-	 * Simply adds a way to seperate console output. For Debug Purposes.
-	*/
+	 * Adds a 'section' cutter. Pointless? Maybe
+	 * */
 	public static void newSection(){
-		console("//=====================================================================//");
+		console("//==========================================================//");
 	}
 	//=====================================================================//
 	/**
@@ -118,7 +200,9 @@ public class LL {
 	}
 	//===================================================================//
 	/**
-	 * @param sent The Sentence of words to break. Similar to the word to letters array method 
+	 * The Sentence Similar to the word to letters array method 
+	 * @param sent The Sentence to break up
+	 * 
 	*/
 	public static ArrayList<String> sentenceBreaker(String sent){
 		ArrayList<String> ret = new ArrayList<String>();
@@ -432,6 +516,116 @@ public class LL {
 			console("ERROR EXECUTING COMMAND");
 		}
 	}
+	//======================================================
+	/**
+	 * Prompts a question while return the answer as a string.
+	 * @param q Question to prompt.
+	 * */
+	public static String BasicHash(String in, int max){
+		return en.Basichash(in, max);
+	}
+	//======================================================
+	// Sound Thread to pass on
+	public static Thread soundThread(String FileName, boolean repeat){
+		return new LLS(FileName, repeat);
+	}
+	//======================================================
+	// Press Enter to continue bit.
+	public static void pressEnterToContinue(){
+		LL.askQuestion("Press Enter To Continue");
+	}
 	
+	//=======================
+	// ALL THE KEYZ
+	public static int getKeyVal(char in){return in;}
 	
+	public static final int
+	KEY_APOSTROPHE    = 39,
+	KEY_COMMA         = 44,
+	KEY_MINUS         = 45,
+	KEY_PERIOD        = 46,
+	KEY_SLASH         = 47,
+	KEY_0             = 48,
+	KEY_1             = 49,
+	KEY_2             = 50,
+	KEY_3             = 51,
+	KEY_4             = 52,
+	KEY_5             = 53,
+	KEY_6             = 54,
+	KEY_7             = 55,
+	KEY_8             = 56,
+	KEY_9             = 57,
+	KEY_SEMICOLON     = 59,
+	KEY_EQUAL         = 61,
+	
+	KEY_a             = 97,
+	KEY_b             = 98,
+	KEY_c             = 99,
+	KEY_d             = 100,
+	KEY_e             = 101,
+	KEY_f             = 102,
+	KEY_g             = 103,
+	KEY_h             = 104,
+	KEY_i             = 105,
+	KEY_j             = 106,
+	KEY_k             = 107,
+	KEY_l             = 108,
+	KEY_m             = 109,
+	KEY_n             = 110,
+	KEY_o             = 111,
+	KEY_p             = 112,
+	KEY_q             = 113,
+	KEY_r             = 114,
+	KEY_s             = 115,
+	KEY_t             = 116,
+	KEY_u             = 117,
+	KEY_v             = 118,
+	KEY_w             = 119,
+	KEY_x             = 120,
+	KEY_y             = 121,
+	KEY_z             = 122,
+	
+	KEY_A             = 65,
+	KEY_B             = 66,
+	KEY_C             = 67,
+	KEY_D             = 68,
+	KEY_E             = 69,
+	KEY_F             = 70,
+	KEY_G             = 71,
+	KEY_H             = 72,
+	KEY_I             = 73,
+	KEY_J             = 74,
+	KEY_K             = 75,
+	KEY_L             = 76,
+	KEY_M             = 77,
+	KEY_N             = 78,
+	KEY_O             = 79,
+	KEY_P             = 80,
+	KEY_Q             = 81,
+	KEY_R             = 82,
+	KEY_S             = 83,
+	KEY_T             = 84,
+	KEY_U             = 85,
+	KEY_V             = 86,
+	KEY_W             = 87,
+	KEY_X             = 88,
+	KEY_Y             = 89,
+	KEY_Z             = 90,
+	
+	KEY_LEFT_BRACKET  = 91,
+	KEY_BACKSLASH     = 92,
+	KEY_RIGHT_BRACKET = 93,
+	KEY_GRAVE_ACCENT  = 96,
+	KEY_WORLD_1       = 161,
+	KEY_RIGHT         = 262,
+	KEY_LEFT          = 263,
+	KEY_DOWN          = 264,
+	KEY_UP            = 265,
+	KEY_WORLD_2       = 162;	
+//================================
+	public static void LL_LINK(){
+		/*
+		 * I Exist for the Sole Purpose of Linking LL to Extensions
+		 * */
+	}
 }
