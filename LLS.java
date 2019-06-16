@@ -1,4 +1,4 @@
-package main;
+package Main;
 
 import java.net.URL;
 
@@ -8,7 +8,7 @@ import javax.sound.sampled.Clip;
 public class LLS extends Thread implements Runnable {
 	/**
 	 * THIS CLASS IS AN OBJECT TO HANDLE SOUND
-	 * PLEASE BE CAUTIOUS AS IT EXTENDS THREAD!!!
+	 * PLEASE BE CAUTIOUS AS IT IS ITS OWN THREAD!!!
 	 * 
 	 * */
 	
