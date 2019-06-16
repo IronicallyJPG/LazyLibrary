@@ -1,8 +1,8 @@
 # LazyLibrary
 A Java Library Implementing Features I use or would find useful at some point.
 Making it as I learn more and more about the language.
-CURRENT VERSION: 1.5.2
-
+CURRENT COMPILED VERSION: 1.5.2
+CURRENT RAW      VERSION: 1.7.0
 Trouble Understanding?
 LL.java Houses Everything.
 The LL*insert letter* Are 'Extensions' that are Objects Holding all the actual functions LL uses.
