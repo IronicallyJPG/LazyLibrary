@@ -239,12 +239,41 @@ public class LL {
 		// COLUMS DOWN
 		// Foreground (Text Colors)
 		for (int i = 0; i < 256; i++) {
-			System.out.print(((char) 27) + "[38;5;" + i + "m" + i + LL.RESET);
+			if (i % 16 == 0) {
+				LL.console("");
+			}
+			System.out.print(LL.TxtSequence + i + "m" + i + LL.RESET);
 		}
+		LL.console("");
 		// Backgrounds (Background Colors)
 		for (int i = 0; i < 256; i++) {
-			System.out.print(((char) 27) + "[48;5;" + i + "m" + i + LL.RESET);
+			if (i % 16 == 0) {
+				LL.console("");
+			}
+			System.out.print(LL.BGSequence + i + "m" + i + LL.RESET);
 		}
+		System.out.print("\n");
+	}
+	
+	/**
+	 * Draws American flag
+	 */
+	public static void DrawaAmericanFlag() {
+		System.out
+				.print(ColorBackground(" * * * * * * * ", 21) + ColorBackground("                         ", 1) + "\n");
+		System.out.print(
+				ColorBackground("* * * * * * *  ", 21) + ColorBackground("                         ", 255) + "\n");
+		System.out
+				.print(ColorBackground(" * * * * * * * ", 21) + ColorBackground("                         ", 1) + "\n");
+		System.out.print(
+				ColorBackground("* * * * * * *  ", 21) + ColorBackground("                         ", 255) + "\n");
+		System.out
+				.print(ColorBackground(" * * * * * * * ", 21) + ColorBackground("                         ", 1) + "\n");
+		System.out.print(ColorBackground("                                        ", 255) + "\n");
+		System.out.print(ColorBackground("                                        ", 1) + "\n");
+		System.out.print(ColorBackground("                                        ", 255) + "\n");
+		System.out.print(ColorBackground("                                        ", 1) + "\n");
+		System.out.print(ColorBackground("                                        ", 255) + "\n");
 	}
 	
 	/**
@@ -284,10 +313,7 @@ public class LL {
 			try {
 				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 			}
-			catch (InterruptedException e) {
-				// e.printStackTrace();
-			}
-			catch (IOException e) {
+			catch (Exception e) {
 				// e.printStackTrace();
 			}
 			return;
@@ -316,13 +342,18 @@ public class LL {
 			try {
 				new ProcessBuilder("cmd", "/c", "title " + newTitle).inheritIO().start().waitFor();
 			}
-			catch (InterruptedException e) {
-				// e.printStackTrace();
-			}
-			catch (IOException e) {
+			catch (Exception e) {
 				// e.printStackTrace();
 			}
 			return;
+		}
+		else {
+			try {
+				LL.console(ESC + "]1;" + newTitle + BELL);
+			}
+			catch (Exception e) {
+				// LL.console(e.getMessage());
+			}
 		}
 	}
 	
@@ -361,6 +392,10 @@ public class LL {
 		}
 		return;
 	}
+	
+	/*
+	 * Make a Beep
+	 */
 	
 	/**
 	 * Sends a message only seen when DEV_MODE is enabled
@@ -690,25 +725,17 @@ public class LL {
 	/**
 	 * Returns Current Time
 	 */
-	public static String getCurrentTime() {
+	public static String getCurrentTime_24Hour() {
 		date = new LLD();
-		return date.getTimeOfDayInDate();
+		return date.getTimeOfDayInDate_24Hour();
 	}
 	
 	/**
 	 * Returns Current Time IN 24 HOUR FORMAT
 	 */
-	public static String getCurrentTime_24HourFormat() {
+	public static String getCurrentTime_12Hour() {
 		date = new LLD();
-		return date.getTimeOfDayInDate();
-	}
-	
-	/**
-	 * Returns Current Time with AM/PM
-	 */
-	public static String getCurrentTimeWithAmPm() {
-		date = new LLD();
-		return date.getTimeOfDayInDateWithAMPM();
+		return date.getTimeOfDayInDate_12Hour();
 	}
 	
 	/**
@@ -1246,35 +1273,43 @@ public class LL {
 	
 	// ANSI ESCAPE CODE CONSOLE COLORS
 	// Reset
-	public static final String RESET = ((char) 27) + "[0m"; // Reset Escape
-															// code.
-	// Reset
-	// Regular Colors
-	public static final String	BLACK	= ((char) 27) + "[30m";	// BLACK
-	public static final String	RED		= ((char) 27) + "[31m";	// RED
-	public static final String	GREEN	= ((char) 27) + "[32m";	// GREEN
-	public static final String	YELLOW	= ((char) 27) + "[33m";	// YELLOW
-	public static final String	BLUE	= ((char) 27) + "[34m";	// BLUE
-	public static final String	PURPLE	= ((char) 27) + "[35m";	// PURPLE
-	public static final String	CYAN	= ((char) 27) + "[36m";	// CYAN
-	public static final String	WHITE	= ((char) 27) + "[37m";	// WHITE
-	
-	// Background
-	public static final String	BLACK_BACKGROUND	= ((char) 27) + "[40m";	// BLACK
-	public static final String	RED_BACKGROUND		= ((char) 27) + "[41m";	// RED
-	public static final String	GREEN_BACKGROUND	= ((char) 27) + "[42m";	// GREEN
-	public static final String	YELLOW_BACKGROUND	= ((char) 27) + "[43m";	// YELLOW
-	public static final String	BLUE_BACKGROUND		= ((char) 27) + "[44m";	// BLUE
-	public static final String	PURPLE_BACKGROUND	= ((char) 27) + "[45m";	// PURPLE
-	public static final String	CYAN_BACKGROUND		= ((char) 27) + "[46m";	// CYAN
-	public static final String	WHITE_BACKGROUND	= ((char) 27) + "[47m";	// WHITE
-	
+	public static final String	RESET		= (char) 27 + "[0m";	// ResetEscapecode
+	public static final char	BELL		= (char) 7;
+	public static final char	ESC			= (char) 27;
+	public static final String	BGSequence	= ESC + "[48;5;";
+	public static final String	TxtSequence	= ESC + "[38;5;";
 	// Special Additions
-	public static final String	UNDERLINE			= ((char) 27) + "[4m";
-	public static final String	CANCEL_UNDERLINE	= ((char) 27) + "[24m";
-	public static final String	REVERSED			= ((char) 27) + "[7m";
-	public static final String	BOLD				= ((char) 27) + "[1m";
+	public static final String	UNDERLINE			= ESC + "[4m";
+	public static final String	CANCEL_UNDERLINE	= ESC + "[24m";
+	public static final String	REVERSED			= ESC + "[7m";
+	public static final String	BOLD				= ESC + "[1m";
 	
+	// Function for Generating Colored Text
+	public static final String ColorText(String input, int XtermColorCode) {
+		return TxtSequence + XtermColorCode + "m" + input + RESET;
+	}
+	
+	// Function for Generating Colored Text
+	public static final String ColorBackground(String input, int XtermColorCode) {
+		return BGSequence + XtermColorCode + "m" + input + LL.RESET;
+	}
+	
+	public static final String ColorForegroundBackground(String message, int XtermColorCodeA, int XtermColorCodeB) {
+		return TxtSequence + XtermColorCodeA + "m" + BGSequence + XtermColorCodeB + "m" + message + RESET;
+	}
+	
+	// ======================
+	public static final void setBackgroundColor(int XtermColorCode) {
+		System.out.print(BGSequence + XtermColorCode + "m");
+	}
+	
+	public static final void setTextColor(int XtermColorCode) {
+		System.out.print(TxtSequence + XtermColorCode + "m");
+	}
+	
+	public static final void ResetConsoleColor() {
+		System.out.print(RESET);
+	}
 	// ================================
 	
 	public static void LL_LINK() {
