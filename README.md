@@ -1,18 +1,18 @@
 # LazyLibrary
-A Java Library Implementing Features I use or would find useful at some point.
-Making it as I learn more and more about the language.
-CURRENT COMPILED VERSION: 1.5.2
-CURRENT RAW      VERSION: 1.7.0
-Trouble Understanding?
-LL.java Houses Everything.
-The LL*insert letter* Are 'Extensions' that are Objects Holding all the actual functions LL uses.
- | LLIO - houses all the code neccessary to work with basic *IO*. LL has a method that simply acts to make it more accessible.
- | LLE  - Does not do Anything right now :(
- | LLD  - Time/*D*ate Functions
- | LLM  - Will House *M*ath Functions
- | LLN  - *N*etwork, also not done :(
- | LLS  -  A Special *S*ound Object that is extending Thread. It takes internal sound files (When given the path), and plays them         
-  without interrupting the main Thread.
-On 1/29/17 This is Accurate :)
-
-{ Compile .java Files to Use Library OR Download Pre-Compiled JAR }
+A Java Library Implementing Features I use or would find useful at some point.<br/>
+Making it as I learn more and more about the language.<br/>
+CURRENT COMPILED VERSION: 1.5.2<br/>
+CURRENT RAW      VERSION: 1.7.0<br/>
+Trouble Understanding?<br/>
+LL.java Houses Everything.<br/>
+The LL*insert letter* Are 'Extensions' that are Objects Holding all the actual functions the LazyLibrary uses.<br/>
+ | LLIO - houses all the code neccessary to work with basic *IO*. LL has a method that simply acts to make it more accessible.<br/>
+ | LLE  - Basic *Encryption* ideas, not complete <br/>
+ | LLD  - Time/*Date* Functions <br/>
+ | LLM  - Will House *Math* Functions <br/>
+ | LLN  - *Network*, in progress! <br/>
+ | LLS  -  A *Sound* Tool, Capable of loading and playing sound! Thanks to: <a href="https://github.com/RalleYTN/SimpleAudio/wiki/Playing-audio">SimpleAudio</a>  <br/>       
+  without interrupting the main Thread.<br/>
+On 1/29/17 This is Accurate :)<br/>
+<br/>
+{ Compile .java Files to Use Library OR Download Pre-Compiled JAR (Most Likely Outdated) }<br/>
