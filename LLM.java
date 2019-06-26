@@ -4,11 +4,11 @@ package Main;
 import java.util.*;
 
 public class LLM {
-
+	
 	public LLM() {
 		LL.LL_LINK();
 	}
-
+	
 	// ===============================================
 	// AVERAGE HANDLER!
 	/**
@@ -25,7 +25,7 @@ public class LLM {
 		ret = (ret / i.length);
 		return ret;
 	}
-
+	
 	/**
 	 * Average for INTEGER [USING ARRAYLIST]
 	 * 
@@ -40,7 +40,7 @@ public class LLM {
 		ret = (ret / i.size());
 		return ret;
 	}
-
+	
 	/**
 	 * Average for LONG [USING ARRAYLIST]
 	 * 
@@ -55,7 +55,7 @@ public class LLM {
 		ret = (ret / i.size());
 		return ret;
 	}
-
+	
 	/**
 	 * Average for LONG [USING ARRAY]
 	 * 
@@ -70,7 +70,7 @@ public class LLM {
 		ret = (ret / i.length);
 		return ret;
 	}
-
+	
 	/**
 	 * 
 	 * */
@@ -83,7 +83,7 @@ public class LLM {
 		ret = (Math.round(ret * 1000f)) / 1000f;
 		return ret;
 	}
-
+	
 	/**
 	 * 
 	 * */
@@ -96,7 +96,7 @@ public class LLM {
 		ret = (Math.round(ret * 1000f)) / 1000f;
 		return ret;
 	}
-
+	
 	double averageDouble(double[] f) {
 		double ret = 0.0D;
 		for (double t : f) {
@@ -106,7 +106,7 @@ public class LLM {
 		ret = (Math.round(ret * 1000D)) / 1000D;
 		return ret;
 	}
-
+	
 	/**
 	 * 
 	 * */
@@ -119,7 +119,7 @@ public class LLM {
 		ret = (Math.round(ret * 1000D)) / 1000D;
 		return ret;
 	}
-
+	
 	// ===============================================
 	// Find Largest Value from array
 	int findLargestValueINT(int[] i) {
@@ -131,7 +131,7 @@ public class LLM {
 		}
 		return ret;
 	}
-
+	
 	int findLargestValueINT(ArrayList<Integer> i) {
 		int ret = 0;
 		for (int t : i) {
@@ -141,7 +141,7 @@ public class LLM {
 		}
 		return ret;
 	}
-
+	
 	long findLargestValueLONG(long[] i) {
 		long ret = 0;
 		for (long t : i) {
@@ -151,7 +151,7 @@ public class LLM {
 		}
 		return ret;
 	}
-
+	
 	long findLargestValueLONG(ArrayList<Long> i) {
 		long ret = 0;
 		for (long t : i) {
@@ -161,7 +161,7 @@ public class LLM {
 		}
 		return ret;
 	}
-
+	
 	float findLargestValueFLOAT(float[] i) {
 		float ret = 0;
 		for (float t : i) {
@@ -171,7 +171,7 @@ public class LLM {
 		}
 		return ret;
 	}
-
+	
 	float findLargestValueFLOAT(ArrayList<Float> i) {
 		float ret = 0;
 		for (float t : i) {
@@ -181,7 +181,7 @@ public class LLM {
 		}
 		return ret;
 	}
-
+	
 	double findLargestValueDOUBLE(double[] i) {
 		double ret = 0;
 		for (double t : i) {
@@ -191,7 +191,7 @@ public class LLM {
 		}
 		return ret;
 	}
-
+	
 	double findLargestValueDOUBLE(ArrayList<Double> i) {
 		double ret = 0;
 		for (double t : i) {
@@ -201,12 +201,12 @@ public class LLM {
 		}
 		return ret;
 	}
-
+	
 	// ====================================================
 	boolean isOdd(int value) {
 		boolean ret = false;
 		int end = value;
-
+		
 		while (end != 2 || end != -2) {
 			if (end == 1 || end == -1) {
 				break;
@@ -214,12 +214,12 @@ public class LLM {
 			end = (end / 2);
 			LL.console(end);
 		}
-
+		
 		if (end == 2 || end == -2) {
 			ret = true;
 		}
-
+		
 		return ret;
 	}
-
+	
 }

@@ -1,96 +1,67 @@
+
 package Main;
 
-import java.net.URL;
+import java.util.*;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import audio.*;
 
-public class LLS extends Thread implements Runnable {
+public class LLS {
 	/**
-	 * THIS CLASS IS AN OBJECT TO HANDLE SOUND
-	 * PLEASE BE CAUTIOUS AS IT IS ITS OWN THREAD!!!
-	 * 
-	 * */
-	
-	
-	
-	
-	private String filename;				// Music/Sound File Path
-	private boolean re;						// Repeat Boolean
-	private Clip clip;						// The Clip as a sound Object in itself
-	private boolean hasrunbeenrun = false;	// Has the 'run' of this thread been ran?
-	private boolean stopped = false;		// Has the sound clip been stopped purposely?
-	
-	public LLS(String soundName, boolean repeat){
-		this.setFilename(soundName);
-		this.setRe(repeat); 
+	 * NONE OF THIS WOULD BE POSSIBLE WITHOUT SimpleAudio BY:
+	 * 'https://github.com/RalleYTN/SimpleAudio'
+	 */
+	public LLS() {
+		LL.LL_LINK();
 	}
 	
+	private HashMap<String, Audio> AudioSources = new HashMap<String, Audio>();
 	
-	@Override
-	public void run() {
+	public void AddAudioSource(String audioFilePath, String RefTitleForAudio) {
 		try {
-			hasrunbeenrun = true;
-			this.setName(filename);
-            URL in = ClassLoader.getSystemResource(filename);
-            clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(in));
-            if(re==true){
-            	clip.loop(1000);
-            	clip.start();
-            	return;
-            }else{
-            	clip.start();
-            	return;
-            }
-        } catch (Exception e) {
-        	if(LL.DEV_MODE==true){
-        		e.printStackTrace();
-        	}else{
-        		LL.console("!!! ERR_SOUND_HANDLER !!!");
-        	}
-        } 
-	}
-	//============================================================
-	public void stopSound(){
-		clip.stop();
-		stopped = true;
-	}
-	//==========================================
-	public void playSound(){
-		if(hasrunbeenrun == false){
-			run();
-		}else{
-			if(stopped==true){
-				clip.flush();
-				clip.start();
-			}else{
-				clip.start();
-			}
+			Audio audio = new StreamedAudio(audioFilePath);
+			audio.addAudioListener(event -> {
+				
+			});
+			audio.open();
+			AudioSources.put(RefTitleForAudio, audio);
+		}
+		catch (AudioException exception) {
+			exception.printStackTrace();
 		}
 	}
-	//============================================================
 	
-
-	public String getFilename() {
-		return filename;
-	}
-
-
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-
-
-	public boolean isRe() {
-		return re;
-	}
-
-
-	public void setRe(boolean re) {
-		this.re = re;
+	public void PlayAudioSource(String ReferenceName) {
+		AudioSources.get(ReferenceName).play();
 	}
 	
+	public void StopAudioSourceBeingPlayed(String ReferenceName) {
+		AudioSources.get(ReferenceName).stop();
+	}
+	
+	public void unloadAudioSource(String ReferenceName) {
+		if (AudioSources.get(ReferenceName).isPlaying()) {
+			LL.console("MUST STOP AUDIO BEFORE REMOVAL");
+		}
+		else {
+			AudioSources.get(ReferenceName).close();
+			AudioSources.remove(ReferenceName);
+		}
+	}
+	
+	public void setVolume(float VOL) {
+		for (Map.Entry<String, Audio> entry : AudioSources.entrySet()) {
+			entry.getValue().setVolume(VOL);
+		}
+	}
+	
+	public void Debug_ShowOpenAudioSources() {
+		for (Map.Entry<String, Audio> entry : AudioSources.entrySet()) {
+			LL.console(entry.getKey());
+		}
+	}
+	
+	public void setAudioSourceToLoop(String ReferenceName) {
+		AudioSources.get(ReferenceName).loop();
+	}
 	
 }
-
