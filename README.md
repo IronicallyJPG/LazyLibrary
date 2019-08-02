@@ -2,7 +2,7 @@
 A Java Library Implementing Features I use or would find useful at some point.<br/>
 Making it as I learn more and more about the language.<br/>
 CURRENT COMPILED VERSION: 1.8.0 (NEW SOURCE INCLUDED!)<br/>
-CURRENT RAW      VERSION: 1.8.\*<br/>
+CURRENT Source   VERSION: 1.9.\*<br/>
 LL.java Houses Everything.<br/>
  | LLIO-- **IO** Specific Functions.<br/>
  | LLE--- **Encryption** ideas, not complete. <br/>
