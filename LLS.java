@@ -1,6 +1,7 @@
 
 package Main;
 
+import java.io.*;
 import java.util.*;
 
 import audio.*;
@@ -19,10 +20,28 @@ public class LLS {
 	public void AddAudioSource(String audioFilePath, String RefTitleForAudio) {
 		try {
 			Audio audio = new StreamedAudio(audioFilePath);
-			audio.addAudioListener(event -> {
-				
-			});
 			audio.open();
+			audio.addAudioListener(event -> {
+				if (event.getType() == AudioEvent.Type.PAUSED) {
+					// LL.console("PAUSED");
+				}
+			});
+			AudioSources.put(RefTitleForAudio, audio);
+		}
+		catch (AudioException exception) {
+			exception.printStackTrace();
+		}
+	}
+	
+	public void AddAudioSource(File audioFile, String RefTitleForAudio) {
+		try {
+			Audio audio = new StreamedAudio(audioFile);
+			audio.open();
+			audio.addAudioListener(event -> {
+				if (event.getType() == AudioEvent.Type.PAUSED) {
+					// LL.console("PAUSED");
+				}
+			});
 			AudioSources.put(RefTitleForAudio, audio);
 		}
 		catch (AudioException exception) {
@@ -31,20 +50,35 @@ public class LLS {
 	}
 	
 	public void PlayAudioSource(String ReferenceName) {
-		AudioSources.get(ReferenceName).play();
+		try {
+			AudioSources.get(ReferenceName).play();
+		}
+		catch (Exception e) {
+			AudioSourceNotFound(e);
+		}
+		
 	}
 	
 	public void StopAudioSourceBeingPlayed(String ReferenceName) {
-		AudioSources.get(ReferenceName).stop();
+		try {
+			AudioSources.get(ReferenceName).pause();
+		}
+		catch (Exception e) {
+			AudioSourceNotFound(e);
+		}
 	}
 	
 	public void unloadAudioSource(String ReferenceName) {
-		if (AudioSources.get(ReferenceName).isPlaying()) {
-			LL.console("MUST STOP AUDIO BEFORE REMOVAL");
-		}
-		else {
+		try {
+			if (AudioSources.get(ReferenceName).isPlaying()) {
+				AudioSources.get(ReferenceName).pause();
+			}
 			AudioSources.get(ReferenceName).close();
 			AudioSources.remove(ReferenceName);
+			
+		}
+		catch (Exception e) {
+			AudioSourceNotFound(e);
 		}
 	}
 	
@@ -61,7 +95,57 @@ public class LLS {
 	}
 	
 	public void setAudioSourceToLoop(String ReferenceName) {
-		AudioSources.get(ReferenceName).loop();
+		try {
+			AudioSources.get(ReferenceName).loop();
+		}
+		catch (Exception e) {
+			AudioSourceNotFound(e);
+		}
+	}
+	
+	public void ToggleMute() {
+		for (Map.Entry<String, Audio> entry : AudioSources.entrySet()) {
+			entry.getValue().setMute(!entry.getValue().isMuted());;
+		}
+	}
+	
+	public Audio getAudioSourceDirectly(String ReferName) {
+		try {
+			return AudioSources.get(ReferName);
+		}
+		catch (Exception e) {
+			AudioSourceNotFound(e);
+		}
+		return null;
+	}
+	
+	public String getPlayingAudio() {
+		String ret = "Running Sounds,";
+		int amt = 0;
+		for (Map.Entry<String, Audio> entry : AudioSources.entrySet()) {
+			if (entry.getValue().isPlaying()) {
+				amt++;
+				ret += "\n\t" + entry.getKey();
+			}
+		}
+		ret += "\nTotal Tracks: " + amt;
+		return ret;
+	}
+	
+	public void UnloadAllSounds(boolean YOUSURE) {
+		if (YOUSURE == false) return;
+		String SourcesToRemove = "";
+		for (Map.Entry<String, Audio> entry : AudioSources.entrySet()) {
+			SourcesToRemove += entry.getKey() + ":";
+		}
+		SourcesToRemove = SourcesToRemove.substring(0, SourcesToRemove.length() - 1);
+		for (String G : SourcesToRemove.split(":")) {
+			unloadAudioSource(G);
+		}
+	}
+	
+	private void AudioSourceNotFound(Exception e) {
+		// e.printStackTrace();
 	}
 	
 }

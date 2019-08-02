@@ -5,6 +5,8 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 
+import audio.*;
+
 public class LL {
 	
 	/*
@@ -18,12 +20,12 @@ public class LL {
 	
 	// ====================================================================//
 	// Basic Variables Needed Supplied for Library //
-	public static String			AUTHOR		= "Charles";
-	public static String			LibName		= "LazyLib";
-	public static String			VERSION		= "1.7.0";
-	public static String			Desc		= "A Simple Lazy Library.";
-	public static boolean			DEV_MODE	= true;
-	public static ArrayList<Object>	runtimeArgs;
+	public static String	AUTHOR		= "Ironically.MP4";
+	public static String	LibName		= "LazyLibrary";
+	public static String	VERSION		= "1.8.0";
+	public static String	Desc		= "A Simple Lazy Library.";
+	public static boolean	DEV_MODE	= false;
+	private static Scanner	ReadConsole	= new Scanner(System.in);
 	
 	private static NumberFormat NF = NumberFormat.getInstance();
 	
@@ -432,10 +434,12 @@ public class LL {
 	 */
 	public static String askQuestion(String q) {
 		String ret = "No Answer";
-		@SuppressWarnings("resource")
-		Scanner s = new Scanner(System.in);
+		if (q.equals("[$*]")) {
+			System.out.print("Press Enter To Continue...");
+			return ReadConsole.nextLine();
+		}
 		System.out.print(q);
-		ret = s.nextLine();
+		ret = ReadConsole.nextLine();
 		ret.trim();
 		return ret;
 	}
@@ -453,10 +457,7 @@ public class LL {
 	public static String askQuestionWithAnswers(String question, Object[] answers) {
 		String ret = "No Answer";
 		
-		@SuppressWarnings("resource")
-		Scanner s = new Scanner(System.in);
-		
-		// Pre-Check before executing Code
+		// Pre-Check the Question&Answers
 		if (question.length() < 2) return "NOT VALID QUESTION!";
 		try {
 			answers[0] = answers[0];
@@ -465,7 +466,7 @@ public class LL {
 			return "ANSWER LIST INVALID FOR: " + question;
 		}
 		// --
-		
+		// Runs through Question along with Valid Answers
 		boolean isDone = false;
 		while (isDone == false) {
 			console(question);
@@ -473,7 +474,7 @@ public class LL {
 				console(i + " : " + answers[i]);
 			}
 			System.out.print("Your Answer Choice >> ");
-			ret = s.nextLine();
+			ret = ReadConsole.nextLine();
 			try {
 				ret = (String) answers[Integer.parseInt(ret)];
 				isDone = true;
@@ -671,14 +672,6 @@ public class LL {
 	
 	// ===================================================================//
 	/**
-	 * MUST BE RUN IN MAIN METHOD! TRANSFERING RUNTIME ARGS TO HERE FOR STORAGE!
-	 */
-	public static final void SPECIAL_argsToArrayList(Object[] o) {
-		runtimeArgs = returnArrayListFromArray(o);
-	}
-	
-	// ===================================================================//
-	/**
 	 * The Sentence Similar to the word to letters array method
 	 * 
 	 * @param sent
@@ -709,6 +702,13 @@ public class LL {
 	 */
 	public static String[] getCurrentDirectoryContents() {
 		return io.getCDContents();
+	}
+	
+	/**
+	 * Returns an Array of Files in A Given Directory
+	 */
+	public static String[] getGivenDirectoryContents(String FolderPath) {
+		return io.getFilesInFolder(FolderPath);
 	}
 	
 	// ==================================================================//
@@ -1206,6 +1206,7 @@ public class LL {
 	}
 	
 	// ====================================================== Encrytion Section
+	/* SECT LL Encryption Handling */
 	/**
 	 * Generates a Caesar Cipher key with a given seed! This IN THEORY Allows a
 	 * little stronger caesar cipher usage.
@@ -1246,11 +1247,11 @@ public class LL {
 	// ======================================================
 	// Press Enter to continue bit.
 	public static void pressEnterToContinue() {
-		LL.askQuestion("Press Enter To Continue");
+		LL.askQuestion("[$*]");
 	}
 	
 	// ======================================================
-	// SOUND Handling
+	/* SECT LL SOUND Handling */
 	/**
 	 * Adds An Audio Source that can be Played, Stopped, etc
 	 * 
@@ -1262,6 +1263,19 @@ public class LL {
 	 */
 	public static void AddSoundSource(String FilePath, String ReferenceName) {
 		snd.AddAudioSource(FilePath, ReferenceName);
+	}
+	
+	/**
+	 * Adds An Audio Source that can be Played, Stopped, etc
+	 * 
+	 * @param SoundFile
+	 *            The File itself
+	 * @param ReferenceName
+	 *            The name to be used for reference to the audio source
+	 * 
+	 */
+	public static void AddSoundSource(File SoundFile, String ReferenceName) {
+		snd.AddAudioSource(SoundFile, ReferenceName);
 	}
 	
 	/**
@@ -1306,6 +1320,14 @@ public class LL {
 	}
 	
 	/**
+	 * gets the Playing Sound Sources
+	 * 
+	 */
+	public static void PlayingSoundSources() {
+		LL.console(snd.getPlayingAudio());
+	}
+	
+	/**
 	 * Sets the Loop Boolean for Loaded Sound Sources
 	 * 
 	 * @param SoundName
@@ -1314,6 +1336,35 @@ public class LL {
 	 */
 	public static void LoopASound(String SoundName) {
 		snd.setAudioSourceToLoop(SoundName);
+	}
+	
+	/**
+	 * Toggles the Mute boolean like a switch. Sets the boolean opposite of what
+	 * it is.
+	 * 
+	 */
+	public static void MuteToggle() {
+		snd.ToggleMute();
+	}
+	
+	public static Audio AudioSourceDirectly(String ReferName) {
+		return snd.getAudioSourceDirectly(ReferName);
+	}
+	
+	/**
+	 * Unloads a sound file from Memory.
+	 */
+	public static void UnloadSound(String refername) {
+		snd.unloadAudioSource(refername);
+	}
+	
+	/**
+	 * Unloads ALL SOUNDS from Memory.
+	 * 
+	 * @Warning USE CAREFULLY
+	 */
+	public static void UnloadAllSounds(boolean AreYouSure) {
+		snd.UnloadAllSounds(AreYouSure);;
 	}
 	
 	// =======================
