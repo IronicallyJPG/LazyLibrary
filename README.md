@@ -3,7 +3,6 @@ A Java Library Implementing Features I use or would find useful at some point.<b
 Making it as I learn more and more about the language.<br/>
 CURRENT COMPILED VERSION: 1.8.0 (NEW SOURCE INCLUDED!)<br/>
 CURRENT RAW      VERSION: 1.8.*<br/>
-Trouble Understanding?<br/>
 LL.java Houses Everything.<br/>
 The LL*insert letter* Are 'Extensions' that are Objects Holding all the actual functions the LazyLibrary uses.<br/>
  | LLIO - houses all the code neccessary to work with basic *IO*. LL has a method that simply acts to make it more accessible.<br/>
