@@ -12,6 +12,6 @@ The LL*insert letter* Are 'Extensions' that are Objects Holding all the actual f
  | LLM  - Will House *Math* Functions <br/>
  | LLN  - *Network*, in progress! <br/>
  | LLS  -  A *Sound* Tool, Capable of loading and playing sound! Thanks to: <a href="https://github.com/RalleYTN/SimpleAudio/wiki/Playing-audio">SimpleAudio</a>  <br/>       
-On 6/26/19 This is Accurate :)<br/>
+On 8/02/19 This is Accurate :)<br/>
 <br/>
 { Compile .java Files to Use Library OR Download Pre-Compiled JAR (Most Likely Outdated) }<br/>
