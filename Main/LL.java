@@ -1,11 +1,16 @@
 
-package Main;
+package com.ironically.main;
 
-import java.io.*;
-import java.text.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
-import audio.*;
+import com.main.SimpleAudio.Audio;
 
 public class LL {
 	
@@ -276,38 +281,46 @@ public class LL {
 	}
 	
 	/**
-	 * True/False Method for OS CHECK.
+	 * True/False Method for Windows OS CHECK.
 	 * 
 	 * @return Returns TRUE if Windows OS
 	 */
 	public static boolean isWindows() {
-		return (getOsName().indexOf("win") >= 0);
+		return (getOsName().indexOf("win") > 0);
 	}
 	
 	/**
-	 * True/False Method for OS CHECK.
+	 * True/False Method for MacOS CHECK.
 	 * 
-	 * @return Returns TRUE if MACOS
+	 * @return Returns TRUE if MacOS
 	 */
 	public static boolean isMac() {
-		return (getOsName().indexOf("mac") >= 0);
+		return (getOsName().indexOf("mac") > 0);
 	}
 	
 	/**
-	 * True/False Method for OS CHECK.
-	 * 
+	 * True/False Method for Linux OS CHECK.
+	 * @apiNote This MAY Miss specific Distros.
 	 * @return Returns TRUE if Linux based OS
 	 */
 	public static boolean isLinux() {
-		return (getOsName().indexOf("nux") >= 0);
+		return (getOsName().indexOf("nux")>0);
 	}
+	
+	public static String getOS() {
+		if(isWindows()) return "Windows";
+		if(isMac())return "Mac";
+		if(isLinux())return "Linux";
+		return "Unknown OS";
+	}
+	
 	
 	/**
 	 * Clears the Console taking into Account OS INDEPENDENT Commands.
 	 * 
 	 */
 	public static void CLEAR_CONSOLE() {
-		// If the Game runs on Windows
+		// If the function runs on Windows
 		if (isWindows()) {
 			try {
 				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -317,13 +330,13 @@ public class LL {
 			}
 			return;
 		}
-		// If the game runs on Linux
+		// If the function runs on Linux
 		if (isLinux()) {
 			System.out.print("\033[H\033[2J");
 			System.out.flush();
 			return;
 		}
-		// If the Game runs on Expensive linux
+		// If the function runs on Expensive linux (MacOS)
 		if (isMac()) {
 			System.out.print("\\33c\\e[3J");
 			return;
@@ -357,12 +370,12 @@ public class LL {
 	}
 	
 	/**
-	 * SLOW PRINT Tool
+	 * SLOW PRINT function for the Console output.
 	 * 
 	 * @param t
 	 *            The String to write to console.
 	 * @param seconds
-	 *            Time to display test.
+	 *            How long it'll take in seconds to write entire message. 
 	 */
 	public static void slowPrint(Object t, double seconds) {
 		char[] test = t.toString().toCharArray();
@@ -372,18 +385,17 @@ public class LL {
 			try {
 				Thread.sleep((long) timer);
 			}
-			catch (InterruptedException e) {}
+			catch (InterruptedException e) {/* This Catch Function is mostly Formal. */}
 		}
-		LL.console(" ");
 	}
 	
 	/**
-	 * Sends a message only seen when DEV_MODE is enabled
+	 * Sends a message only seen when the DEV_MODE flag is TRUE.
 	 * 
 	 * @param message
 	 *            Info to display.
 	 * @param time
-	 *            Add a time to the message
+	 *            Add a time Stamp to the message
 	 */
 	public static void DebugMsg(Object message, String time) {
 		if (DEV_MODE == true) {
@@ -392,12 +404,8 @@ public class LL {
 		return;
 	}
 	
-	/*
-	 * Make a Beep
-	 */
-	
 	/**
-	 * Sends a message only seen when DEV_MODE is enabled
+	 * Sends a message only seen when the DEV_MODE Flag TRUE
 	 * 
 	 * @param message
 	 *            Info to display.
@@ -409,6 +417,13 @@ public class LL {
 	}
 	// =====================================================================//
 	
+	/**
+	 * Converts a given String to another String with the Letters/Numbers converted into their Char values.
+	 * 
+	 * @param The Input String.
+	 * @apiNote Example: 072:105 = 'Hi'
+	 * 
+	 * */
 	public static String StringToCharInts(String input) {
 		String output = "";
 		for (char F : input.toCharArray()) {
@@ -454,7 +469,7 @@ public class LL {
 	 * @param answers
 	 *            List of Answers to choose from
 	 */
-	public static String askQuestionWithAnswers(String question, Object[] answers) {
+	public static String askQuestionWithAnswers(String question, Object... answers) {
 		String ret = "No Answer";
 		
 		// Pre-Check the Question&Answers
@@ -592,7 +607,7 @@ public class LL {
 	
 	// =====================================================================//
 	/**
-	 * Adds a 'section' cutter. Pointless? Maybe
+	 * Adds a Line (//===//) to split Console Output. Pointless? Maybe
 	 */
 	public static void newSection() {
 		console("//==========================================================//");
@@ -609,28 +624,6 @@ public class LL {
 		return NF.format(num);
 	}
 	
-	// =======================================================================//
-	/**
-	 * A Lottery Winning Number Generator!
-	 * 
-	 * @param AmtOfNumbers
-	 *            The 'set' size. Example: 1 winning number? 3 Numbers?
-	 * 
-	 * @param num_length
-	 *            Range a number can have!
-	 * 
-	 * @param amtDrawn
-	 *            The amount of Numbers to generate
-	 */
-	public static int[] LotteryWinnerGenerator(int AmtOfNumbers, int Range) {
-		int[] winner = new int[AmtOfNumbers];
-		Random r = new Random();
-		for (int x = 0; x < AmtOfNumbers; x++) {
-			winner[x] = (r.nextInt(Range) + 1);
-		}
-		return winner;
-	}
-	
 	// =====================================================================//
 	/**
 	 * A Lottery Number Generator!
@@ -642,6 +635,8 @@ public class LL {
 	 *            Range a number can have!
 	 * @param amtDrawn
 	 *            The amount of Numbers to generate
+	 * @apiNote 
+	 * 			   A Winner can be created by Running the same function, replace Draws with 1.
 	 */
 	public static ArrayList<int[]> LotteryNumbersGenerator(int AmtOfNumbers, int Range, int Draws) {
 		ArrayList<int[]> Numbers = new ArrayList<int[]>();
@@ -657,7 +652,7 @@ public class LL {
 	}
 	
 	/**
-	 * Converts standard array object to arraylist object.
+	 * Converts standard array object to array list object.
 	 * 
 	 * @param o
 	 *            Array[] TO ArrayList<>
@@ -672,7 +667,7 @@ public class LL {
 	
 	// ===================================================================//
 	/**
-	 * The Sentence Similar to the word to letters array method
+	 * Breaks a Sentence into an Array list of words.
 	 * 
 	 * @param sent
 	 *            The Sentence to break up
@@ -792,7 +787,7 @@ public class LL {
 	
 	// =============================================================//
 	/**
-	 * Returns Number of Processors Availible
+	 * Returns Number of Processing Cores Available
 	 */
 	public static int getAvailibleProcessor() {
 		return Runtime.getRuntime().availableProcessors();
@@ -806,10 +801,7 @@ public class LL {
 	}
 	
 	/**
-	 * Returns Java Version as an INTEGER in java MAJOR VERSION.
-	 * 
-	 * @param getMinor
-	 *            Returns the MINOR VERSION!
+	 * Returns Java MAJOR VERSION Integer.
 	 */
 	public static int getMajorJavaVersion() {
 		String version = System.getProperty("java.version");
@@ -826,14 +818,14 @@ public class LL {
 	}
 	
 	/**
-	 * Returns Current OS Name Ex. "Windows 7"
+	 * Returns Current OS Name Ex. "windows 7" All Lower case.
 	 */
 	public static String getOsName() {
 		return System.getProperty("os.name").toLowerCase();
 	}
 	
 	/**
-	 * Returns Current Language in use
+	 * Returns Current Language in use.
 	 */
 	public static String getCurrentLang() {
 		switch (System.getProperty("user.language").substring(0, 2)) {
@@ -850,26 +842,26 @@ public class LL {
 			case "es":
 				return "Spanish";
 			default:
-				return "Unknown Language";
+				return System.getProperty("user.language").substring(0, 2);
 		}
 	}
 	
 	/**
-	 * Returns Current OS Architecture, such as x86, amd64, ect
+	 * Returns Current OS Architecture, such as x86, amd64, or ARM.
 	 */
 	public static String getOsArchitecture() {
 		return System.getProperty("os.arch");
 	}
 	
 	/**
-	 * Returns Current Username
+	 * Returns Current User name.
 	 */
 	public static String getCurrentUserName() {
 		return System.getProperty("user.name");
 	}
 	
 	/**
-	 * Returns Current Country
+	 * Returns Current Country.
 	 */
 	public static String getCurrentCountry() {
 		return System.getProperty("user.country");
@@ -911,29 +903,40 @@ public class LL {
 	// =============================================================//
 	/**
 	 * Creates a txt file with passed name
+	 * @return The newly made Text File.
 	 */
 	public static File newFile(String name) {
 		return io.createFile(name);
 	}
-	
+	/**
+	 * Creates a file with passed name and Extension. EX: name.extension
+	 * @return The newly made file.
+	 */
 	public static File newFile(String FileName, String Extension) {
 		return io.createFile(FileName, Extension);
 	}
 	
 	/**
-	 * Creates a temporary txt file with passed name
+	 * Creates a temporary txt file with passed name. 
+	 * @apiNote WILL BE DELETED UPON PROGRAM EXIT!
+	 * @return The New Temp File.
 	 */
 	public static File newTempFile(String name) {
 		return io.createTempFile(name);
 	}
 	
+	/**
+	 * Creates a new Direction Within the Current Directory. (For Windows this would be a Folder.)
+	 * 
+	 * @return The new Directory.
+	 */
 	public static File newDirectory(String name) {
 		return io.createDirectory(name);
 	}
 	
 	// =====================
 	/**
-	 * deletes a txt file with passed name
+	 * Deletes a text file with passed name
 	 */
 	public static void deleteFile(String name) {
 		File f = new File(name + ".txt");
@@ -941,7 +944,7 @@ public class LL {
 	}
 	
 	/**
-	 * deletes a txt file with passed name AND Extension
+	 * Deletes a file with passed name AND Extension. 
 	 */
 	public static void deleteFile(String name, String ext_WithOut_Period) {
 		File f = new File(name + "." + ext_WithOut_Period);
@@ -957,7 +960,7 @@ public class LL {
 	
 	// ======================
 	/**
-	 * Writes text to file given filename, data to write, and if it belongs on a
+	 * Writes text to text file given filename, data to write, and if it belongs on a
 	 * new line
 	 */
 	public static void writeToFileName(String fileName, String dataToWrite, boolean newLine) {
@@ -976,6 +979,8 @@ public class LL {
 	/**
 	 * Gets Text from a file with given File Name! INCLUDING EXTENSION! [ex:
 	 * "readme.txt" is good]
+	 * 
+	 * @return Any found data.
 	 */
 	public static String getDataFromFile(String WHOLE_FILE_NAME) {
 		File f = new File(WHOLE_FILE_NAME);
@@ -984,6 +989,8 @@ public class LL {
 	
 	/**
 	 * Gets Text from a file with given File Object
+	 * 
+	 * @return Any found data.
 	 */
 	public static String getDataFromFile(File file) {
 		if (!file.exists()) return "NULL";
@@ -1011,35 +1018,20 @@ public class LL {
 	 * 
 	 * @param List
 	 *            ArrayList<Object> for ANY duplicates
+	 * @return
+	 * 		   True if there ANY repeats. False if not.
 	 */
 	public static boolean CheckArrayListForDuplicates(ArrayList<?> List) {
 		boolean ret = false;
-		
-		ArrayList<Object> remove = new ArrayList<Object>();
-		for (Object t : List) {
-			int count = 0;
-			for (Object f : List) {
-				if (t == f) {
-					count++;
-				}
-			}
-			if (count > 1) {
-				ret = true;
-				remove.add(t);
-			}
+		for(Object t : List) {
+			if(LL.countRepeatsInArray(List, t)>0)ret = true;
 		}
-		if (!remove.isEmpty() || remove != null) {
-			for (Object y : remove) {
-				List.remove(y);
-			}
-		}
-		
 		return ret;
 	}
 	
 	// ======================
 	/**
-	 * Captures a screenshot, then saves with given name
+	 * Captures a screenshot on the primary monitor, then saves with given name
 	 */
 	public static void scrnShot(String sc) {
 		io.ScreenShot(sc);
@@ -1047,7 +1039,8 @@ public class LL {
 	
 	// ======================
 	/**
-	 * is file present?
+	 * Checks for file. No Extension Required. Assumed .txt file.
+	 * @return True if the file exists.
 	 */
 	public static boolean isFilePresent(String fileName) {
 		File f = new File(fileName + ".txt");
@@ -1055,7 +1048,8 @@ public class LL {
 	}
 	
 	/**
-	 * is file present WTIH specified extension?
+	 * Checks for File WTIH specified extension?
+	 * @return True if the file exists.
 	 */
 	public static boolean isFilePresentExt(String fileName, String extension) {
 		File f = new File(fileName + "." + extension);
@@ -1063,9 +1057,10 @@ public class LL {
 	}
 	
 	// ==================================================
-	// Net Tools!
+	// Net Tools! 
 	/**
 	 * Debug for host work
+	 * @apiNote NOT FINISHED
 	 */
 	public static void testHost() {
 		net.currentHostTest();
@@ -1073,6 +1068,7 @@ public class LL {
 	
 	/**
 	 * Is connected to Internet?
+	 * @apiNote NOT FINISHED
 	 */
 	public static boolean isOnline() {
 		return net.connectedToInternet();
@@ -1080,6 +1076,7 @@ public class LL {
 	
 	/**
 	 * Tests if site is up.
+	 * @apiNote NOT FINISHED
 	 */
 	public static boolean isSiteOnline(String url) {
 		return net.siteonline(url);
@@ -1090,7 +1087,7 @@ public class LL {
 	 * Returns a float conversion of F TO C
 	 * 
 	 * @param currentFTemp
-	 *            Current Farenheight Temperature
+	 *            Current Fahrenheit Temperature
 	 */
 	public static float FahrenheitToCelcius(float currentFTemp) {
 		float ret = 0.0f;
@@ -1102,7 +1099,7 @@ public class LL {
 	 * Returns a float conversion of C TO F
 	 * 
 	 * @param currentCTemp
-	 *            The Current celsius Temperature
+	 *            The Current Celsius Temperature
 	 */
 	public static float CelciusToFahrenheit(float currentCTemp) {
 		float ret = 0.0f;
@@ -1135,6 +1132,8 @@ public class LL {
 	// =======================================================
 	/**
 	 * Converts a currency from one to another.
+	 * 
+	 * @apiNote The exchange values may not be 100% Accurate.
 	 * 
 	 * @param ct
 	 *            convert TO what currency? [usd,pnd,eur,can]
@@ -1368,10 +1367,6 @@ public class LL {
 	}
 	
 	// =======================
-	// ALL THE KEYZ
-	public static int getKeyVal(char in) {
-		return in;
-	}
 	
 	public static final int KEY_APOSTROPHE = 39, KEY_COMMA = 44, KEY_MINUS = 45, KEY_PERIOD = 46, KEY_ENTER = 13, KEY_SLASH = 47, KEY_0 = 48,
 			KEY_1 = 49, KEY_2 = 50, KEY_3 = 51, KEY_4 = 52, KEY_5 = 53, KEY_6 = 54, KEY_7 = 55, KEY_8 = 56, KEY_9 = 57, KEY_SEMICOLON = 59,
@@ -1403,29 +1398,43 @@ public class LL {
 	public static final String	REVERSED			= ESC + "[7m";
 	public static final String	BOLD				= ESC + "[1m";
 	
-	// Function for Generating Colored Text
+	/** Function for Generating Colored Text */
 	public static final String ColorText(String input, int XtermColorCode) {
 		return TxtSequence + XtermColorCode + "m" + input + RESET;
 	}
 	
-	// Function for Generating Colored Text
+	/** Function for Generating Background Color for the passed Text. */
 	public static final String ColorBackground(String input, int XtermColorCode) {
 		return BGSequence + XtermColorCode + "m" + input + LL.RESET;
 	}
 	
+	/**
+	 * Generates Colored Background and Colored Text String.
+	 * */
 	public static final String ColorForegroundBackground(String message, int XtermColorCodeA, int XtermColorCodeB) {
 		return TxtSequence + XtermColorCodeA + "m" + BGSequence + XtermColorCodeB + "m" + message + RESET;
 	}
 	
 	// ======================
+	/**
+	 * This prints out the Sequence DIRECTLY to the console. 
+	 * @apiNote Recommend you use the Color Functions that return a String back. 
+	 * @return The Background color sequence.
+	 * */
 	public static final void setBackgroundColor(int XtermColorCode) {
 		System.out.print(BGSequence + XtermColorCode + "m");
 	}
-	
+	/**
+	 * This prints out the Sequence DIRECTLY to the console.
+	 * @apiNote Recommend you use the Color Functions that return a String back. 
+	 * @return The Text color sequence.
+	 * */
 	public static final void setTextColor(int XtermColorCode) {
 		System.out.print(TxtSequence + XtermColorCode + "m");
 	}
-	
+	/**
+	 * Resets the Color set currently active.
+	 * */
 	public static final void ResetConsoleColor() {
 		System.out.print(RESET);
 	}
@@ -1434,6 +1443,7 @@ public class LL {
 	public static void LL_LINK() {
 		/*
 		 * I Exist for the Sole Purpose of Linking LL to Extensions
+		 * This Prevents Modules being used without the Main LL file.
 		 */
 	}
 }
